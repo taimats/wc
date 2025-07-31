@@ -125,6 +125,11 @@ func output(records []record, total int) {
 	fmt.Println(" ----------------------------------------")
 	fmt.Printf(" %s          %s         %s\n", "DATE", "FILE", "WORD COUNT")
 	fmt.Println(" ----------------------------------------")
+	if len(records) == 0 {
+		fmt.Println(" You have never written anything.")
+		fmt.Println()
+		return
+	}
 	for _, r := range records {
 		fmt.Printf(" %s    %s        %d words\n", r.date, r.name, r.num)
 	}
