@@ -121,17 +121,17 @@ func sortByDate(records []record) []record {
 
 func output(records []record, total int) {
 	fmt.Println()
-	fmt.Printf(" %s : %d words\n", "total", total)
-	fmt.Println(" ----------------------------------------")
-	fmt.Printf(" %s          %s         %s\n", "DATE", "FILE", "WORD COUNT")
-	fmt.Println(" ----------------------------------------")
+	fmt.Printf(" %s: %d words\n", "total", total)
+	fmt.Println(" -----------------------------------------------")
+	fmt.Printf(" %s          %s    %s\n", "DATE", "WORD COUNT", "FILE")
+	fmt.Println(" -----------------------------------------------")
 	if len(records) == 0 {
 		fmt.Println(" You have never written anything.")
 		fmt.Println()
 		return
 	}
 	for _, r := range records {
-		fmt.Printf(" %s    %s        %d words\n", r.date, r.name, r.num)
+		fmt.Printf(" %s    %d words     %s\n", r.date, r.num, r.name)
 	}
 	fmt.Println()
 }
