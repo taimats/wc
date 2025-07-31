@@ -84,4 +84,13 @@ func TestExecuteWC(t *testing.T) {
 		a.Equal(want, got)
 		a.Nil(err)
 	})
+
+	t.Run("異常_01:ディレクトリの指定:不正な拡張子", func(t *testing.T) {
+		path := "./test4"
+		a := assert.New(t)
+
+		got, err := internal.ExecuteWC(path)
+		a.Nil(got)
+		a.Nil(err)
+	})
 }

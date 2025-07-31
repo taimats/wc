@@ -12,6 +12,15 @@ import (
 	"time"
 )
 
+var invalidExts = []string{
+	".exe",
+	".doc",
+	".docx",
+	".xlsx",
+	".xls",
+	".csv",
+}
+
 type record struct {
 	date string
 	name string
@@ -52,6 +61,9 @@ func executeWC(fpath string) ([]record, error) {
 			return nil
 		}
 		if d.IsDir() {
+			return nil
+		}
+		if isInValidExt(d.Name()) {
 			return nil
 		}
 		r, err := recordFromFile(path)
@@ -119,17 +131,26 @@ func sortByDate(records []record) []record {
 	return records
 }
 
+func isInValidExt(name string) bool {
+	for _, ext := range invalidExts {
+		if strings.HasSuffix(name, ext) {
+			return true
+		}
+	}
+	return false
+}
+
 func output(records []record, total int) {
 	fmt.Println()
-	fmt.Printf(" %s: %d words\n", "total", total)
-	fmt.Println(" -----------------------------------------------")
-	fmt.Printf(" %s          %s    %s\n", "DATE", "WORD COUNT", "FILE")
-	fmt.Println(" -----------------------------------------------")
 	if len(records) == 0 {
 		fmt.Println(" You have never written anything.")
 		fmt.Println()
 		return
 	}
+	fmt.Printf(" %s: %d words\n", "total", total)
+	fmt.Println(" -----------------------------------------------")
+	fmt.Printf(" %s          %s    %s\n", "DATE", "WORD COUNT", "FILE")
+	fmt.Println(" -----------------------------------------------")
 	for _, r := range records {
 		fmt.Printf(" %s    %d words     %s\n", r.date, r.num, r.name)
 	}
