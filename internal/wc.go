@@ -63,7 +63,7 @@ func executeWC(fpath string) ([]record, error) {
 		if d.IsDir() {
 			return nil
 		}
-		if isInValidExt(d.Name()) {
+		if isInvalidExt(d.Name()) {
 			return nil
 		}
 		r, err := recordFromFile(path)
@@ -85,6 +85,7 @@ func recordFromFile(path string) (record, error) {
 	if err != nil {
 		return record{}, err
 	}
+	defer f.Close()
 	info, err := os.Lstat(path)
 	if err != nil {
 		return record{}, err
@@ -131,7 +132,7 @@ func sortByDate(records []record) []record {
 	return records
 }
 
-func isInValidExt(name string) bool {
+func isInvalidExt(name string) bool {
 	for _, ext := range invalidExts {
 		if strings.HasSuffix(name, ext) {
 			return true

@@ -14,6 +14,7 @@ func TestCountWords(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to open file: %s", err)
 	}
+	defer f.Close()
 	got := internal.CountWords(f)
 	if got != 17 {
 		t.Errorf("Not Equal: (want=%d, got=%d)", 17, got)
