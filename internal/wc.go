@@ -153,7 +153,7 @@ func output(records []record, total int) {
 	fmt.Printf(" %s          %s    %s\n", "DATE", "WORD COUNT", "FILE")
 	fmt.Println(" -----------------------------------------------")
 	for _, r := range records {
-		fmt.Printf(" %s    %d words     %s\n", r.date, r.num, r.name)
+		fmt.Printf(" %s    %03d words     %s\n", r.date, r.num, r.name)
 	}
 	fmt.Println()
 }
